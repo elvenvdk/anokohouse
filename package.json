@@ -1,0 +1,9 @@
+{
+  "name": "anokohouse",
+  "version": "1.0.0",
+  "description": "anokohouse website",
+  "main": "index.js",
+  "repository": "https://github.com/elvenvdk/anokohouse.git",
+  "author": "alvin van der kuech",
+  "license": "MIT"
+}
