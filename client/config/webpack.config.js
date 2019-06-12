@@ -1,37 +1,47 @@
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+
 const isDevelopment =
   process.argv[process.argv.indexOf('--mode') + 1] === 'development';
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js'
+  },
   output: {
-    path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name]-bundle.js',
+    path: path.resolve(__dirname + '../dist'),
+    publicPath: '/'
+    // filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: '../dist'
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
       },
       {
         test: /\.css$/,
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
       },
       {
-        test: /\.module.s(a|c)ss$/,
-        use: [
-          { loader: 'style-loader' },
+        test: /\.modules.s(a|c)ss$/,
+        loader: [
+          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIdentName: '[name]__[local]__[hash:base64:5]',
+              localIdentName: '[name]__[local]___[hash:base64:5]',
               camelCase: true,
               sourceMap: isDevelopment
             }
@@ -45,7 +55,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.s.(a|c)ss$/,
+        test: /\.s(a|c)ss$/,
         exclude: /\.module.(s(a|c)ss)$/,
         loader: [
           isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -53,6 +63,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
+              localIdentName: '[name]__[local]___[hash:base64:5]',
               sourceMap: isDevelopment
             }
           }
@@ -67,6 +78,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: isDevelopment ? '[name].css' : '[name].[hash].css',
       chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
+    }),
+    new HTMLWebpackPlugin({
+      template: 'dist/index.html'
     })
   ]
 };
