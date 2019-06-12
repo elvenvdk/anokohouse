@@ -80,7 +80,7 @@ module.exports = {
       chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
     }),
     new HTMLWebpackPlugin({
-      template: 'dist/index.html'
+      template: 'public/index.html'
     })
   ]
 };
