@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown } from '@fortawesome/free-regular-svg-icons';
-import {
-  faUsers,
-  faUmbrella,
-  faInfinity
-} from '@fortawesome/free-solid-svg-icons';
-
 import LandingPage from '../../components/LandingPage';
 
 import store from '../../store';

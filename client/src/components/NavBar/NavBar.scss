@@ -1,0 +1,32 @@
+.NavBar {
+  position: fixed;
+  overflow: hidden;
+  z-index: 7;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  &__Logo {
+    margin: 4% auto 0 2%;
+    height: 94px;
+    width: 145px;
+  }
+
+  &__Headers-Container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    top: 25%;
+    list-style: none;
+
+    li {
+      margin: 0 3rem 0 0;
+      cursor: pointer;
+    }
+  }
+}
