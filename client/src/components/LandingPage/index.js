@@ -22,27 +22,48 @@ class LandingPage extends Component {
       </div>
     ));
   };
+
+  renderAboutText = () => {
+    return AnokohouseText.aboutText.map((text, idx) => {
+      return (
+        <p key={idx} className='Section__About-Text'>
+          {text.aboutText}
+        </p>
+      );
+    });
+  };
+
+  renderBenefitsText = () => {
+    return AnokohouseText.benefitsText.map((text, idx) => (
+      <div key={idx} className='Section__Benefits-Text-List-Container-Items'>
+        <h3>{text.Title}</h3>
+        <p>{text.Text}</p>
+      </div>
+    ));
+  };
+
   render() {
     return (
       <div className='Landing'>
         <div className='Landing--Container'>
-          <NavBar />
-          <div className='Landing__Header-Image' />
-          <button
-            className='Landing__Top-Link-Btn'
-            type='button'
-            value='CURIOUS ABOUT ANOKOHOUSE?'
+          <Section sectionClassName='Header'>
+            <NavBar />
+            <div className='Landing__Header-Image' />
+            <button
+              className='Landing__Top-Link-Btn'
+              type='button'
+              value='CURIOUS ABOUT ANOKOHOUSE?'
+            >
+              CURIOUS ABOUT ANOKOHOUSE?
+            </button>
+          </Section>
+
+          <Section
+            sectionClassName='About'
+            sectionId='About'
+            title={AnokohouseText.aboutTitle}
           >
-            CURIOUS ABOUT ANOKOHOUSE?
-          </button>
-          <Section sectionClassName='About' sectionId='About'>
-            <h3 className='Section__About-Title'>
-              {AnokohouseText.aboutTitle}
-            </h3>
-            <p className='Section__About-Text'>{AnokohouseText.aboutText1}</p>
-            <p className='Section__About-Text'>{AnokohouseText.aboutText2}</p>
-            <p className='Section__About-Text'>{AnokohouseText.aboutText3}</p>
-            <p className='Section__About-Text'>{AnokohouseText.aboutText4}</p>
+            {this.renderAboutText()}
           </Section>
           <Section sectionClassName='About-2' sectionId='About2'>
             <div className='Section__About-2-Text-Container'>
@@ -61,10 +82,11 @@ class LandingPage extends Component {
               />
             </div>
           </Section>
-          <Section sectionClassName='Core-Values' sectionId='Core-Values'>
-            <h3 className='Section__Core-Values-Title'>
-              {AnokohouseText.coreValuesTitle.toUpperCase()}
-            </h3>
+          <Section
+            sectionClassName='Core-Values'
+            sectionId='Core-Values'
+            title={AnokohouseText.coreValuesTitle.toUpperCase()}
+          >
             <div className='Section__Core-Values-Text-Container'>
               <div className='Section__Core-Values-Text-Container-Love'>
                 <FontAwesomeIcon
@@ -94,6 +116,18 @@ class LandingPage extends Component {
                   'Hate-Text-Item'
                 )}
               </div>
+            </div>
+          </Section>
+          <Section
+            sectionClassName='Benefits'
+            sectionId='Benefits'
+            title={AnokohouseText.benefitsTitle}
+          >
+            <p className='Section__Benefits-Title-Text'>
+              {AnokohouseText.benefitsTitleText}
+            </p>
+            <div className='Section__Benefits-Text-List-Container'>
+              {this.renderBenefitsText()}
             </div>
           </Section>
         </div>

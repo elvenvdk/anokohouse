@@ -55,7 +55,7 @@ $landing-color: green;
     }
     &-Text {
       position: relative;
-      max-width: 80%;
+      max-width: 63%;
       margin: 3rem auto;
       text-align: center;
       font-size: 1.8rem;
@@ -67,7 +67,7 @@ $landing-color: green;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #70a3f4;
+    background-color: #6394bf;
     max-height: 45rem;
 
     &-Img-Container {
@@ -91,6 +91,7 @@ $landing-color: green;
   .Section__Core-Values {
     margin: 0 auto;
     background-color: #cbdaf2;
+    height: 60rem;
     &-Title {
       position: relative;
       top: 5rem;
@@ -117,6 +118,57 @@ $landing-color: green;
           margin: 3rem 0;
         }
       }
+    }
+  }
+
+  .Section__Benefits {
+    position: relative;
+    background-image: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+      url('../../assets/vip_lounge.jpg');
+    background-size: cover;
+    height: 80rem;
+
+    &-Title {
+      position: relative;
+      top: 20%;
+      // left: 45%;
+      text-align: center;
+      margin: 0 auto;
+      color: #ffffff;
+      font-size: 2.4rem;
+    }
+
+    &-Title-Text {
+      position: relative;
+      top: 35%;
+      margin: 0 auto;
+      color: #ffffff;
+      max-width: 80rem;
+      text-align: center;
+      line-height: 3rem;
+    }
+
+    &-Text-List-Container {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      // background-color: brown;
+      width: 90rem;
+      height: 30rem;
+      margin: 0 auto;
+      top: 45%;
+    }
+
+    &-Text-List-Container-Items {
+      position: relative;
+      color: #ffffff;
+      width: 18rem;
+      text-align: center;
     }
   }
 }
