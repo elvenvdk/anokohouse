@@ -6,6 +6,10 @@
   "repository": "https://github.com/elvenvdk/anokohouse.git",
   "author": "Alvin vdK",
   "license": "MIT",
+  "scripts": {
+    "start": "node ./bin/server",
+    "dev": "nodemon ./bin/server"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
