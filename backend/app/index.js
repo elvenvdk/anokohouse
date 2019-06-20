@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const uuid = require('uuid');
 
 const routes = require('./api');
+const { errHandler } = require('./helper');
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use(cookieParser());
 
 app.use('/', routes);
 
+app.use(errHandler);
+
 AWS.config.update({
   region: 'us-east-1',
   accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -26,28 +29,35 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-const params = {
-  Bucket: 'anoko-images'
-};
+// const params = {
+//   Bucket: 'alvinvanderkuech72abe181-3ec8-4d2a-aa70-b598efd61404',
+//   Key: 'testFile.html'
+// };
 
-// delete bucket
+// delete bucket;
 // s3.deleteBucket(params, (err, data) => {
 //   if (err) console.log(err.stack);
 //   console.log(data);
 // });
 
+// delete object in bucket
+// s3.deleteObject(params, (err, data) => {
+//   if (err) console.log(err.stack);
+//   console.log(data);
+// });
+
 // get bucket
-s3.listObjects(params, (err, data) => {
-  if (err) console.log(err.stack);
-  console.log(data);
-});
+// s3.listObjects(params, (err, data) => {
+//   if (err) console.log(err.stack);
+//   console.log(data);
+// });
 
 // create bucket
-// const bucketName = 'alvinvanderkuech' + uuid.v4();
+// const bucketName = 'test-bucket' + uuid.v4();
 // s3.createBucket({ Bucket: bucketName }, () => {
 //   let data = {
 //     Bucket: bucketName,
-//     Key: 'testFile.html',
+//     Key: 'testFile.jpeg',
 //     Body: 'Testing fake image or something...'
 //   };
 //   s3.putObject(data, (err, data) => {

@@ -40,6 +40,8 @@ class Session {
 
   toString() {
     const { username, id } = this;
-    return SessionString({ username, id });
+    return Session.sessionString({ username, id });
   }
 }
+
+module.exports = Session;
