@@ -1,28 +1,25 @@
 const { Router } = require('express');
-const TeamTable = require('../../team/table');
+const PartnersTable = require('../../partners/table');
 const { authenticatedUser } = require('../user/helper');
 
 const router = Router();
 
-// Create team member
+// Create partner
 router.post('/create', (req, res, next) => {
-  const { headShot, title, firstName, lastName, about } = req.body;
+  const { image, title, about, tags } = req.body;
   authenticatedUser({ sessionString: req.cookies.sessionString })
     .then(() => {
-      TeamTable.createTeamMemberObject({ headShot, firstName, lastName })
+      PartnersTable.createPartnerBucket({ image, title })
         .then(data => {
           const { Bucket, Key } = data.bucketData;
-          TeamTable.createTeamMember({
-            headShot: `${Bucket}.s3.amazonaws.com/${Key}`,
+          PartnersTable.createPartner({
+            image: `${Bucket}.s3.amazonaws.com/${Key}`,
             title,
-            firstName,
-            lastName,
-            about
+            about,
+            tags
           })
             .then(() =>
-              res
-                .status(201)
-                .send({ message: 'Team member successfully created.' })
+              res.status(201).send({ message: 'Partner successfully created.' })
             )
             .catch(error => {
               throw error;
@@ -35,19 +32,18 @@ router.post('/create', (req, res, next) => {
     .catch(error => next(error));
 });
 
-// Edit team member
+// Edit partner
 router.put('/update/:id', (req, res, next) => {
-  const { headShot, title, firstName, lastName, about } = req.body;
+  const { image, title, about, tags } = req.body;
   const { id } = req.params;
   authenticatedUser({ sessionString: req.cookies.sessionString })
     .then(() => {
       if (!headShot) {
-        TeamTable.updateTeamMember({
+        PartnersTable.updatePartner({
           id,
           title,
-          firstName,
-          lastName,
-          about
+          about,
+          tags
         })
           .then(() =>
             res
@@ -56,19 +52,18 @@ router.put('/update/:id', (req, res, next) => {
           )
           .catch(error => next(error));
       } else {
-        TeamTable.createTeamMemberObject({ headShot, firstName, lastName })
+        PartnersTable.createPartnerObject({ headShot, firstName, lastName })
           .then(data => {
-            TeamTable.updateTeamMember({
-              headShot: data,
+            PartnersTable.updatePartner({
+              image: `${Bucket}.s3.amazonaws.com/${Key}`,
               title,
-              firstName,
-              lastName,
-              about
+              about,
+              tags
             })
               .then(() =>
                 res
                   .status(201)
-                  .send({ message: 'Team member successfully updated' })
+                  .send({ message: 'partner successfully updated' })
               )
               .catch(error => {
                 throw error;
@@ -82,19 +77,19 @@ router.put('/update/:id', (req, res, next) => {
     .catch(error => next(error));
 });
 
-// View team
+// View partners
 router.get('/', (req, res, next) => {
-  TeamTable.getTeam()
+  PartnersTable.getPartners()
     .then(data => {
       res.send(data);
     })
     .catch(error => next(error));
 });
 
-// View team member
+// View partner
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
-  TeamTable.getTeamMember({ id })
+  PartnersTable.getPartner({ id })
     .then(data => res.send(data))
     .catch(error => next(error));
 });
@@ -104,8 +99,8 @@ router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
   const { sessionString } = req.cookies;
   authenticatedUser({ sessionString })
-    .then(TeamTable.deleteTeamMember({ id }))
-    .then(() => res.send({ message: 'Team member successfully deleted' }))
+    .then(PartnersTable.deleteTeamMember({ id }))
+    .then(() => res.send({ message: 'Partner successfully deleted' }))
     .catch(error => next(error));
 });
 

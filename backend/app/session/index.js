@@ -11,7 +11,7 @@ class Session {
 
   // parse session string
   static parse(sessionString) {
-    const sessionString = sessionString.split(SEPERATOR);
+    const sessionData = sessionString.split(SEPERATOR);
     return {
       username: sessionData[0],
       id: sessionData[1],

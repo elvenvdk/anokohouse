@@ -1,18 +1,18 @@
 const { Router } = require('express');
-const TeamTable = require('../../team/table');
+const MemberTable = require('../../members/table');
 const { authenticatedUser } = require('../user/helper');
 
 const router = Router();
 
-// Create team member
+// Create member
 router.post('/create', (req, res, next) => {
   const { headShot, title, firstName, lastName, about } = req.body;
   authenticatedUser({ sessionString: req.cookies.sessionString })
     .then(() => {
-      TeamTable.createTeamMemberObject({ headShot, firstName, lastName })
+      MemberTable.createMemberObject({ headShot, firstName, lastName })
         .then(data => {
           const { Bucket, Key } = data.bucketData;
-          TeamTable.createTeamMember({
+          MemberTable.createMember({
             headShot: `${Bucket}.s3.amazonaws.com/${Key}`,
             title,
             firstName,
@@ -42,7 +42,7 @@ router.put('/update/:id', (req, res, next) => {
   authenticatedUser({ sessionString: req.cookies.sessionString })
     .then(() => {
       if (!headShot) {
-        TeamTable.updateTeamMember({
+        MemberTable.updateMember({
           id,
           title,
           firstName,
@@ -56,10 +56,12 @@ router.put('/update/:id', (req, res, next) => {
           )
           .catch(error => next(error));
       } else {
-        TeamTable.createTeamMemberObject({ headShot, firstName, lastName })
+        MemberTable.createMemberObject({ headShot, firstName, lastName })
           .then(data => {
-            TeamTable.updateTeamMember({
-              headShot: data,
+            const { Bucket, Key } = data.bucketData;
+            MemberTable.updateMember({
+              id,
+              headShot: `${Bucket}.s3.amazonaws.com/${Key}`,
               title,
               firstName,
               lastName,
@@ -82,29 +84,29 @@ router.put('/update/:id', (req, res, next) => {
     .catch(error => next(error));
 });
 
-// View team
+// View member
 router.get('/', (req, res, next) => {
-  TeamTable.getTeam()
+  MemberTable.getMembers()
     .then(data => {
       res.send(data);
     })
     .catch(error => next(error));
 });
 
-// View team member
+// View member
 router.get('/:id', (req, res, next) => {
   const { id } = req.params;
-  TeamTable.getTeamMember({ id })
+  MemberTable.getMember({ id })
     .then(data => res.send(data))
     .catch(error => next(error));
 });
 
-// Delete team member
+// Delete member
 router.delete('/:id', (req, res, next) => {
   const { id } = req.params;
   const { sessionString } = req.cookies;
   authenticatedUser({ sessionString })
-    .then(TeamTable.deleteTeamMember({ id }))
+    .then(MemberTable.deleteMember({ id }))
     .then(() => res.send({ message: 'Team member successfully deleted' }))
     .catch(error => next(error));
 });

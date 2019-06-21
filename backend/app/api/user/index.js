@@ -38,9 +38,6 @@ router.post('/login', (req, res, next) => {
   const { username, password } = req.body;
   UserTable.getUser({ usernameHash: hash(username) })
     .then(({ user }) => {
-      console.log('user', user);
-      console.log('hash password: ', hash(password));
-      console.log('user.password_hash');
       if (user && user.password_hash === hash(password)) {
         const { session_id } = user;
         return setSession({ username, res, session_id });

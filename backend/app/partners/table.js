@@ -1,4 +1,4 @@
-const pool = require('../../databasePool.js');
+const pool = require('../../databasePool');
 const AWS = require('aws-sdk');
 const dotenv = require('dotenv');
 const uuid = require('uuid');
@@ -13,15 +13,15 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-class TeamTable {
-  static createTeamMember({ headShot, title, firstName, lastName, about }) {
+class PartnersTable {
+  static createPartner({ image, title, about, tags }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        `INSERT INTO team (
-        head_shot, first_name, last_name, title, about
+        `INSERT INTO partners (
+          image, title, about, tags
       )
         VALUES ($1, $2, $3, $4, $5)`,
-        [headShot, firstName, lastName, title, about],
+        [image, title, about, tags],
         (err, response) => {
           if (err) reject(err);
           resolve();
@@ -30,16 +30,16 @@ class TeamTable {
     });
   }
 
-  static updateTeamMember({ id, headShot, title, firstName, lastName, about }) {
+  static updatePartner({ id, image, title, about, tags }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        `UPDATE team SET
-        head_shot =$1, 
-        first_name = $2,
-        last_name = $3, 
-        title, about = $4
+        `UPDATE partner SET
+        image =$1, 
+        title = $2,
+        about = $3, 
+        tags = $4
         WHERE id = $5`,
-        [headShot, firstName, lastName, title, about, id],
+        [image, title, about, tags, id],
         (err, response) => {
           if (err) reject(err);
           resolve();
@@ -48,18 +48,18 @@ class TeamTable {
     });
   }
 
-  static createTeamMemberBucket({ headShot, firstName, lastName }) {
+  static createPartnerBucket({ image, title }) {
     return new Promise((resolve, reject) => {
-      const Bucket = `anoko-team-headshots-` + uuid.v4();
-      const Key = `${firstName.toLowerCase()}_${lastName.toLowerCase()}_${headShot}`;
-      s3.createBucket({ Bucket }, () => {
+      const Bucket = `anoko-partner-images-` + uuid.v4();
+      const Key = `${title}_${image}`;
+      s3.createBucket({ Bucket: bucketName }, () => {
         let data = {
           Bucket,
           Key,
-          Body: headShot
+          Body: image
         };
         s3.putObject(data, (err, data) => {
-          if (err) return reject(err);
+          if (err) reject(err);
           console.log(data);
           resolve({ data, Bucket, Key });
         });
@@ -67,11 +67,10 @@ class TeamTable {
     });
   }
 
-  static createTeamMemberObject({ headShot, firstName, lastName }) {
+  static createPartnerObject({ headShot, title }) {
     return new Promise((resolve, reject) => {
-      const Bucket =
-        'anoko-team-headshots-c0ea44fe-a6ec-4523-ba2f-5e3172d8d109';
-      const Key = `${firstName.toLowerCase()}_${lastName.toLowerCase()}_${headShot}`;
+      const Bucket = `anoko-partner-images-` + uuid.v4();
+      const Key = `${title}_${image}`;
       const bucketData = {
         Bucket,
         Key,
@@ -87,36 +86,27 @@ class TeamTable {
   static getBuckets() {
     return new Promise((resolve, reject) => {
       s3.listBuckets((err, data) => {
-        if (err) return reject(err.stack);
+        if (err) reject(err.stack);
         console.log(data);
         resolve(data);
       });
     });
   }
 
-  static getBucket({ bucketName, key }) {
+  static getPartners() {
     return new Promise((resolve, reject) => {
-      const params = { bucketName, key };
-      s3.listObjects(params, (err, data) => {
-        if (err) return reject(err);
-        resolve(data);
-      });
-    });
-  }
-
-  static getTeam() {
-    return new Promise((resolve, reject) => {
-      pool.query(`SELECT * FROM team`, (err, response) => {
-        if (err) return reject(err);
+      pool.query(`SELECT * FROM partners`, (err, response) => {
+        if (err) reject(err);
         resolve(response.rows);
       });
     });
   }
 
-  static getTeamMember({ id }) {
+  static getPartner({ id }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        `SELECT * FROM team WHERE member_id = $1`,
+        `SELECT * FROM partners
+      WHERE partner_id = $1`,
         [id],
         (err, response) => {
           if (err) return reject(err);
@@ -126,14 +116,14 @@ class TeamTable {
     });
   }
 
-  static deleteTeamMember({ id }) {
+  static deletePartner({ id }) {
     return new Promise((resolve, reject) => {
       pool.query(
-        `DELETE FROM team
-      WHERE member_id = $1`,
+        `DELETE FROM partners
+          WHERE partner_id = $1`,
         [id],
         (err, response) => {
-          if (err) return reject(err);
+          if (err) reject(err);
           resolve();
         }
       );
@@ -144,7 +134,7 @@ class TeamTable {
     return new Promise((resolve, reject) => {
       const params = { Bucket: bucket };
       s3.deleteBucket(params, (err, data) => {
-        if (err) console.log(err);
+        if (err) return reject(err);
         resolve(data);
       });
     });
@@ -161,4 +151,4 @@ class TeamTable {
   }
 }
 
-module.exports = TeamTable;
+module.exports = PartnersTable;
