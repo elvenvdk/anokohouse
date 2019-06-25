@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import MaillistReducer from './mailListReducer';
+import partnerReducer from './partnerReducer';
 
 export default combineReducers({
-  mailList: MaillistReducer
+  partnerReducer
 });
