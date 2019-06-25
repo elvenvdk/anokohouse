@@ -21,13 +21,13 @@ app.use('/', routes);
 
 app.use(errHandler);
 
-AWS.config.update({
-  region: 'us-east-1',
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-});
+// AWS.config.update({
+//   region: 'us-east-1',
+//   accessKeyId: process.env.AWS_ACCESS_KEY,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+// });
 
-const s3 = new AWS.S3();
+// const s3 = new AWS.S3();
 
 // const params = {
 //   Bucket: 'alvinvanderkuech72abe181-3ec8-4d2a-aa70-b598efd61404',
