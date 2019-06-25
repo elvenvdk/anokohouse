@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import LandingPage from '../../components/LandingPage';
+import Partners from '../../components/Partners';
 
 import store from '../../store';
 
@@ -15,7 +16,10 @@ class App extends Component {
         <Router>
           <div className='App'>
             <div className='App__Container'>
-              <Route exact path='/' component={LandingPage} />
+              <Switch>
+                <Route exact path='/' component={LandingPage} />
+                <Route path='/partners' component={Partners} />
+              </Switch>
             </div>
           </div>
         </Router>

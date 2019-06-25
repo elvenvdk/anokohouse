@@ -54,7 +54,7 @@ class LandingPage extends Component {
               type='button'
               value='CURIOUS ABOUT ANOKOHOUSE?'
             >
-              CURIOUS ABOUT ANOKOHOUSE?
+              CURIOUS ABOUT ANOKO HOUSE?
             </button>
           </Section>
 
