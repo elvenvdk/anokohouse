@@ -4,8 +4,9 @@ import axios from 'axios';
 import { URL } from './helper';
 
 export const addPartner = partnerData => dispatch => {
+  console.log('actions.addPartner: ', partnerData);
   axios
-    .post(`${URL}/partners`, partnerData)
+    .post(`${URL}/partners/create`, partnerData)
     .then(res =>
       dispatch({ type: PartnerTypes.ADD_PARTNER, payload: res.data })
     )
@@ -16,7 +17,6 @@ export const addPartner = partnerData => dispatch => {
 
 export const getPartners = () => dispatch => {
   setPartnersLoading();
-  s;
   axios
     .get(`${URL}/partners`)
     .then(res =>

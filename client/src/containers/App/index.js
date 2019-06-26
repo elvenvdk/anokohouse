@@ -4,6 +4,9 @@ import { Provider } from 'react-redux';
 
 import LandingPage from '../../components/LandingPage';
 import Partners from '../../components/Partners';
+import UpdatePartner from '../../components/Partners/UpdatePartner';
+import NavBar from '../../components/NavBar';
+import Login from '../../components/auth/Login';
 
 import store from '../../store';
 
@@ -16,9 +19,12 @@ class App extends Component {
         <Router>
           <div className='App'>
             <div className='App__Container'>
+              <NavBar />
+              <Route exact path='/' component={LandingPage} />
+              <Route exact path='/user-login' component={Login} />
               <Switch>
-                <Route exact path='/' component={LandingPage} />
-                <Route path='/partners' component={Partners} />
+                <Route exact path='/partners' component={Partners} />
+                <Route exact path='/update-partner' component={UpdatePartner} />
               </Switch>
             </div>
           </div>

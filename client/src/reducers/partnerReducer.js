@@ -13,6 +13,7 @@ export default (state = INITIAL_STATE, action) => {
         partners: [action.payload, ...state.partners]
       };
     case PartnerTypes.GET_PARTNERS:
+      // console.log(action.payload);
       return {
         ...state,
         partners: action.payload,

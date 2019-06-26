@@ -47,7 +47,7 @@ class LandingPage extends Component {
       <div className='Landing'>
         <div className='Landing--Container'>
           <Section sectionClassName='Header'>
-            <NavBar />
+            {/* <NavBar /> */}
             <div className='Landing__Header-Image' />
             <button
               className='Landing__Top-Link-Btn'

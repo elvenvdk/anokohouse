@@ -10,14 +10,15 @@ class Partners extends Component {
   }
 
   render() {
-    const { partners } = this.props;
+    const { partners } = this.props.partners;
+    console.log(partners);
     return (
       <div className='Partners'>
         <div className='Partners__Container'>
           {partners.length > 0 ? (
             partners.map((partner, idx) => (
               <div key={idx} className='Partners__Container-Item'>
-                {partner.first_name} {partner.last_name}
+                {partner.title}
               </div>
             ))
           ) : (
