@@ -20,7 +20,7 @@ class PartnersTable {
         `INSERT INTO partners (
           image, title, about, tags
       )
-        VALUES ($1, $2, $3, $4, $5)`,
+        VALUES ($1, $2, $3, $4)`,
         [image, title, about, tags],
         (err, response) => {
           if (err) reject(err);
@@ -52,16 +52,15 @@ class PartnersTable {
     return new Promise((resolve, reject) => {
       const Bucket = `anoko-partner-images-` + uuid.v4();
       const Key = `${title}_${image}`;
-      s3.createBucket({ Bucket: bucketName }, () => {
-        let data = {
+      s3.createBucket({ Bucket }, () => {
+        let bucketData = {
           Bucket,
           Key,
           Body: image
         };
-        s3.putObject(data, (err, data) => {
+        s3.putObject(bucketData, (err, data) => {
           if (err) reject(err);
-          console.log(data);
-          resolve({ data, Bucket, Key });
+          resolve({ data, bucketData });
         });
       });
     });
