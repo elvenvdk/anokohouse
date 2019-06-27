@@ -1,0 +1,53 @@
+.Partners {
+  // position: relative;
+  // display: flex;
+  // flex-direction: row;
+
+  &__Header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    top: 20rem;
+    margin: 0 auto;
+    text-align: center;
+
+    h4 {
+      margin-bottom: 10rem;
+    }
+  }
+
+  &__Container {
+    position: relative;
+    top: 35rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 97rem;
+    max-height: 73.6rem;
+    margin: 0 auto;
+
+    &-Item {
+      max-width: 29.3rem;
+      max-height: 67.6rem;
+      margin-bottom: 7rem;
+
+      &-Image {
+        max-width: 30rem;
+        max-height: 23.9rem;
+      }
+
+      &-Tags {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        // flex-wrap: wrap;
+        justify-content: flex-start;
+
+        &-Text {
+          margin: 0 1rem 0 0;
+        }
+      }
+    }
+  }
+}

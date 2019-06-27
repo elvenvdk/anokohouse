@@ -2,7 +2,7 @@ import { UserTypes, ErrorTypes } from '../actions/types';
 
 const INITIAL_STATE = {
   isAuthenticated: false,
-  user: {}
+  message: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -10,8 +10,8 @@ export default (state = INITIAL_STATE, action) => {
     case UserTypes.LOGIN_USER:
       return {
         ...state,
-        isAuthenticated: action.payload,
-        user: action.payload
+        isAuthenticated: true,
+        message: action.payload
       };
     default:
       return state;

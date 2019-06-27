@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { partnersData, partnersTitle } from '../../componentData';
 
 import { getPartners } from '../../actions/partnerActions';
+import './Partners.scss';
 
 class Partners extends Component {
   componentDidMount() {
@@ -11,14 +13,31 @@ class Partners extends Component {
 
   render() {
     const { partners } = this.props.partners;
-    console.log(partners);
     return (
       <div className='Partners'>
+        <div className='Partners__Header'>
+          <h4>PARTNERS</h4>
+          <div>{partnersTitle}</div>
+        </div>
+
         <div className='Partners__Container'>
-          {partners.length > 0 ? (
-            partners.map((partner, idx) => (
+          {partnersData.length > 0 ? (
+            partnersData.map((partner, idx) => (
               <div key={idx} className='Partners__Container-Item'>
-                {partner.title}
+                <img
+                  src={partner.image}
+                  alt=''
+                  className='Partners__Container-Item-Image'
+                />
+                <h5>{partner.title}</h5>
+                <p>{partner.about}</p>
+                <div className='Partners__Container-Item-Tags'>
+                  {partner.tags.map((tag, idx) => (
+                    <p key={idx} className='Partners__Container-Item-Tags-Text'>
+                      {tag}
+                    </p>
+                  ))}
+                </div>
               </div>
             ))
           ) : (

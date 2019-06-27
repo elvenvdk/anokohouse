@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 
 import LandingPage from '../../components/LandingPage';
 import Partners from '../../components/Partners';
-import UpdatePartner from '../../components/Partners/UpdatePartner';
 import NavBar from '../../components/NavBar';
 import Login from '../../components/auth/Login';
 
@@ -24,7 +23,6 @@ class App extends Component {
               <Route exact path='/user-login' component={Login} />
               <Switch>
                 <Route exact path='/partners' component={Partners} />
-                <Route exact path='/update-partner' component={UpdatePartner} />
               </Switch>
             </div>
           </div>

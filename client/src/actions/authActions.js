@@ -9,7 +9,7 @@ export const loginUser = userData => dispatch => {
       withCredentials: true
     })
     .then(res => {
-      console.log(res.data);
+      console.log(res);
       dispatch({
         type: UserTypes.LOGIN_USER,
         payload: res.data

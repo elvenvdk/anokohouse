@@ -1,3 +1,11 @@
+import acehotel from '../assets/Ace-Hotel.jpg';
+import bklynclay from '../assets/BKLYN-Clay-.jpg';
+import barrowGroup from '../assets/The-Barrow-Group.jpg';
+import primeSteakhouse from '../assets/carnem-prime.jpg';
+import loloseafood from '../assets/loLo-seafood.jpeg';
+import leagueOfKitchens from '../assets/League-of-Kitchens.jpg';
+import { faHotel } from '@fortawesome/free-solid-svg-icons';
+
 export const navHeaders = [
   { name: 'our story' },
   // { name: 'benefits' },
@@ -68,3 +76,89 @@ export const AnokohouseText = {
     }
   ]
 };
+
+export const partnersTitle = `Art Classes | 
+                            Arts & Culture | 
+                            Restaurants | 
+                            Performances | 
+                            Hotels | 
+                            Nightlife`;
+
+export const partnersData = [
+  {
+    image: acehotel,
+    title: 'ace hotel',
+    about: `Members receive a 10% discount off 
+    accommodations at Ace Hotel, a hip youthful 
+    hotel in midtown with a retro, artistic decor.
+    The Lobby Bar features a rotating cast of craft 
+    beers & spirits, and a selections of snacks from 
+    the Breslin kitchen. Â During the day, the lobby 
+    takes on a co-working space vibe, and in the 
+    evening there is a lively bar where DJs spin vinyl 
+    or live bands play on select evenings`,
+    tags: ['#nightlife', '#hotel']
+  },
+  {
+    image: bklynclay,
+    title: 'bklyn clay',
+    about: `Members receive 20% discount on Tryday 
+    nights. Trydays for adults happen 
+    on the 1st and 3rd Friday of the month and are 
+    meant to give beginners a feel for the wheel. 
+    BKLYN CLAY is a modern ceramics studio for 
+    potters, artists, production clayworkers and 
+    hobbyists, with the first community Gas Kiln in Brooklyn.`,
+    tags: ['#artclass', '#brooklyn']
+  },
+  {
+    image: barrowGroup,
+    title: 'the barrow group',
+    about: `Members receive a discount off classes at The 
+    Barrow Group Acting School, a performing arts 
+    training center and theater company, which 
+    counts among its alumni, Anne Hathaway, Denis 
+    Hare, Tony Hale and Vera Farmiga. 
+    Classes at TBG include voice/speech, acting, 
+    film/tv, directing, filmmaking, improv, 
+    playwriting/screenwriting.`,
+    tags: ['#class', '#acting', '#education']
+  },
+  {
+    image: primeSteakhouse,
+    title: 'carnem prime steakhouse',
+    about: `Members receive a 15% discount off meals at 
+    Carnem Prime Steakhouse, a restaurant in the 
+    heart of Park Slope, serving modern American 
+    dishes that deftly blend old-classic and new-
+    classic steakhouse dining. Â For fish and veggie 
+    lovers, Carnem also offers a wide range of 
+    seasonal fish, pasta, and vegetables dishes, 
+    including a Whole-Roasted Branzino, Yellowtail 
+    Sashimi, and a Grilled Caesar Salad.`,
+    tags: ['#food', '#culinary', '#wine', '#brooklyn']
+  },
+  {
+    image: loloseafood,
+    title: "lolo's seafood",
+    about: `Members receive a discount off meals at LoLo's Seafood Shack. LoLo's 
+    Seafood Shack serves up 
+    a variety of seafood from the coastal comfort 
+    foods of the Cape like sauced shrimp to 
+    Caribbean street eats such as conch fritters. 
+    LoLo's is known for its famous Johnny Cake 
+    sandwiches and flavorful and fresh seafood 
+    steam-pots.`,
+    tags: ['#food', '#caribbean', '#seafood', '#harlem']
+  },
+  {
+    image: leagueOfKitchens,
+    title: 'league of kitchens cooking classes',
+    about: `Members receive $20 off an "Immersion" 
+    workshop with The League of Kitchens, 
+    an immersive culinary adventure in NYC where 
+    immigrants teach intimate cooking workshops in 
+    their homes. Visit www.leagueofkitchens.com`,
+    tags: ['#food', '#class', '#culinary', '#education']
+  }
+];

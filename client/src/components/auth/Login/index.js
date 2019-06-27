@@ -32,8 +32,8 @@ class Login extends Component {
   };
 
   render() {
+    console.log(this.props.auth);
     const { username, password } = this.state;
-    console.log(username, password);
     return (
       <div className='Login'>
         <form className='Login__Form' onSubmit={this.formSubmitHandler}>
