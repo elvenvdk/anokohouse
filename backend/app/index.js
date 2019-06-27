@@ -11,12 +11,10 @@ const { errHandler } = require('./helper');
 
 const app = express();
 
-dotenv.config();
-
 app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
+dotenv.config();
 app.use('/', routes);
 
 app.use(errHandler);

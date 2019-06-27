@@ -43,7 +43,7 @@ router.post('/login', (req, res, next) => {
         return setSession({ username, res, session_id });
       } else {
         const error = new Error('Incorrect username and/or password');
-        error.statusCode = 400;
+        error.statusCode = 409;
         throw error;
       }
     })
